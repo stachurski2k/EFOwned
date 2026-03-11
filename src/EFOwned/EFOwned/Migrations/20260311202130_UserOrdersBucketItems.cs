@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EFOwned.Migrations
 {
     /// <inheritdoc />
-    public partial class UserOrders : Migration
+    public partial class UserOrdersBucketItems : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,7 +30,8 @@ namespace EFOwned.Migrations
                 {
                     UserId = table.Column<int>(type: "INTEGER", nullable: false),
                     Id = table.Column<int>(type: "INTEGER", nullable: false),
-                    order_date = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    order_date = table.Column<DateTime>(type: "TEXT", nullable: false),
+                    total_price = table.Column<int>(type: "INTEGER", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -42,11 +43,34 @@ namespace EFOwned.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Item",
+                columns: table => new
+                {
+                    BucketOrderUserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    BucketOrderId = table.Column<int>(type: "INTEGER", nullable: false),
+                    Id = table.Column<int>(type: "INTEGER", nullable: false),
+                    price = table.Column<int>(type: "INTEGER", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Item", x => new { x.BucketOrderUserId, x.BucketOrderId, x.Id });
+                    table.ForeignKey(
+                        name: "FK_Item_orders_BucketOrderUserId_BucketOrderId",
+                        columns: x => new { x.BucketOrderUserId, x.BucketOrderId },
+                        principalTable: "orders",
+                        principalColumns: new[] { "UserId", "Id" },
+                        onDelete: ReferentialAction.Cascade);
+                });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Item");
+
             migrationBuilder.DropTable(
                 name: "orders");
 

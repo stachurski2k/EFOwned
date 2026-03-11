@@ -22,6 +22,17 @@ public class MainDbContext : DbContext
             {
                 b2.Property(e => e.OrderDate)
                     .HasColumnName("order_date");
+                b2.OwnsOne(e => e.Bucket, b3 =>
+                {
+                    b3.Property(e => e.TotalPrice)
+                        .HasColumnName("total_price");
+                    b3.OwnsMany(e => e.Items, b4 =>
+                    {
+                        b4.Property(e=>e.Price)
+                            .HasColumnName("price");
+                    });
+                });
+                
                 b2.ToTable("orders");
             });
             
