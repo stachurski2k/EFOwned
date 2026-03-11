@@ -5,7 +5,7 @@
 namespace EFOwned.Migrations
 {
     /// <inheritdoc />
-    public partial class UserAddressesMultipleTables : Migration
+    public partial class UserAddressesMultipleTablesManualKey : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -27,16 +27,16 @@ namespace EFOwned.Migrations
                 name: "home_addresses",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    manual_key = table.Column<int>(type: "INTEGER", nullable: false),
                     home_street = table.Column<string>(type: "TEXT", nullable: false),
                     home_city = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_home_addresses", x => x.UserId);
+                    table.PrimaryKey("PK_home_addresses", x => x.manual_key);
                     table.ForeignKey(
-                        name: "FK_home_addresses_users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_home_addresses_users_manual_key",
+                        column: x => x.manual_key,
                         principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -46,16 +46,16 @@ namespace EFOwned.Migrations
                 name: "work_addresses",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
+                    manual_key = table.Column<int>(type: "INTEGER", nullable: false),
                     work_street = table.Column<string>(type: "TEXT", nullable: false),
                     work_city = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_work_addresses", x => x.UserId);
+                    table.PrimaryKey("PK_work_addresses", x => x.manual_key);
                     table.ForeignKey(
-                        name: "FK_work_addresses_users_UserId",
-                        column: x => x.UserId,
+                        name: "FK_work_addresses_users_manual_key",
+                        column: x => x.manual_key,
                         principalTable: "users",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);

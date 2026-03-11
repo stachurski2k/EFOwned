@@ -37,8 +37,9 @@ namespace EFOwned.Migrations
                 {
                     b.OwnsOne("EFOwned.Entities.Address", "HomeAddress", b1 =>
                         {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("INTEGER");
+                            b1.Property<int>("ManualUserID")
+                                .HasColumnType("INTEGER")
+                                .HasColumnName("manual_key");
 
                             b1.Property<string>("City")
                                 .IsRequired()
@@ -50,18 +51,19 @@ namespace EFOwned.Migrations
                                 .HasColumnType("TEXT")
                                 .HasColumnName("home_street");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("ManualUserID");
 
                             b1.ToTable("home_addresses", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("ManualUserID");
                         });
 
                     b.OwnsOne("EFOwned.Entities.Address", "WorkAddress", b1 =>
                         {
-                            b1.Property<int>("UserId")
-                                .HasColumnType("INTEGER");
+                            b1.Property<int>("ManualUserID")
+                                .HasColumnType("INTEGER")
+                                .HasColumnName("manual_key");
 
                             b1.Property<string>("City")
                                 .IsRequired()
@@ -73,12 +75,12 @@ namespace EFOwned.Migrations
                                 .HasColumnType("TEXT")
                                 .HasColumnName("work_street");
 
-                            b1.HasKey("UserId");
+                            b1.HasKey("ManualUserID");
 
                             b1.ToTable("work_addresses", (string)null);
 
                             b1.WithOwner()
-                                .HasForeignKey("UserId");
+                                .HasForeignKey("ManualUserID");
                         });
 
                     b.Navigation("HomeAddress")

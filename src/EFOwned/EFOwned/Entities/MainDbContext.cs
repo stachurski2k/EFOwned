@@ -23,6 +23,11 @@ public class MainDbContext : DbContext
 
             b.OwnsOne(u => u.HomeAddress, b2 =>
             {
+                b2.Property<int>("ManualUserID")
+                    .HasColumnName("manual_key");
+                b2.HasKey("ManualUserID");
+                b2.WithOwner()
+                    .HasForeignKey("ManualUserID");
                 b2.Property(a => a.City)
                     .HasColumnName("home_city");
                 
@@ -33,6 +38,12 @@ public class MainDbContext : DbContext
             
             b.OwnsOne(u => u.WorkAddress, b2 =>
             {
+                b2.Property<int>("ManualUserID")
+                    .HasColumnName("manual_key");
+                b2.HasKey("ManualUserID");
+                b2.WithOwner()
+                    .HasForeignKey("ManualUserID");
+                    
                 b2.Property(a => a.City)
                     .HasColumnName("work_city");
                 
