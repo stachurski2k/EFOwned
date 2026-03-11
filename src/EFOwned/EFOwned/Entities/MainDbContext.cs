@@ -28,6 +28,7 @@ public class MainDbContext : DbContext
                 
                 b2.Property(a => a.Street)
                     .HasColumnName("home_street");
+                b2.ToTable("home_addresses");
             });
             
             b.OwnsOne(u => u.WorkAddress, b2 =>
@@ -37,6 +38,7 @@ public class MainDbContext : DbContext
                 
                 b2.Property(a => a.Street)
                     .HasColumnName("work_street");
+                b2.ToTable("work_addresses");
             });
             
             b.ToTable("users");

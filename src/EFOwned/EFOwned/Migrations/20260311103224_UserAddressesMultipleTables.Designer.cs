@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EFOwned.Migrations
 {
     [DbContext(typeof(MainDbContext))]
-    [Migration("20260311094210_UserAddressesSingleTable")]
-    partial class UserAddressesSingleTable
+    [Migration("20260311103224_UserAddressesMultipleTables")]
+    partial class UserAddressesMultipleTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,7 @@ namespace EFOwned.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("users");
+                            b1.ToTable("home_addresses", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
@@ -78,7 +78,7 @@ namespace EFOwned.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("users");
+                            b1.ToTable("work_addresses", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");

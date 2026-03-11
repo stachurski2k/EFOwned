@@ -52,7 +52,7 @@ namespace EFOwned.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("users");
+                            b1.ToTable("home_addresses", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
@@ -75,7 +75,7 @@ namespace EFOwned.Migrations
 
                             b1.HasKey("UserId");
 
-                            b1.ToTable("users");
+                            b1.ToTable("work_addresses", (string)null);
 
                             b1.WithOwner()
                                 .HasForeignKey("UserId");
